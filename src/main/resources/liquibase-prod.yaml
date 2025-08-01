@@ -1,7 +1,0 @@
-spring:
-  liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.xml
-    enabled: true
-    url: jdbc:postgresql://prod-db:5432/prod_db
-    user: postgres
-    password: admin

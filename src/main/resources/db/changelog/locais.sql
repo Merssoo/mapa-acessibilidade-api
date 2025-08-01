@@ -13,7 +13,7 @@ CREATE TABLE "locais" (
     rua VARCHAR(100) NOT NULL,
     tipo_local VARCHAR(100) NOT NULL,
     acessivel BOOLEAN NOT NULL,
-    descricao TEXT
+    descricao TEXT,
     CONSTRAINT pk_locais PRIMARY KEY (id)
 );
 

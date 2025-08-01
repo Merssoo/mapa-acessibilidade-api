@@ -19,7 +19,7 @@ public class LocaisService {
 
 
     public LocaisDto save(LocaisDto dto) {
-        Locais locais = repository.save(mapper.ToEntity(dto));
+        Locais locais = repository.save(mapper.toEntity(dto));
         return mapper.toDTO(locais);
     }
 

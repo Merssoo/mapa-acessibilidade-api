@@ -1,6 +1,0 @@
-spring:
-  profiles:
-    active: dev
-
-  liquibase:
-    change-log: classpath:db/changelog/changelog-master.xml
