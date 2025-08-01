@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: mapa-acessibilidade-api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dev_db
+    username: dev_user
+    password: dev_pass
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    enabled: true
+
+  mvc:
+    servlet:
+      path: /mapa-acessibilidade/api
+
+  logging:
+    level:
+      org.hibernate.SQL: DEBUG
+      org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+      org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl: DEBUG
+      com.zaxxer.hikari: DEBUG
