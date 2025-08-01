@@ -26,3 +26,7 @@ spring:
   logging:
     level:
       root: WARN
+
+  cors:
+    frontend:
+      origin: http://localhost:4200/
