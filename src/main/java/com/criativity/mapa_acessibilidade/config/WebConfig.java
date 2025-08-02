@@ -23,21 +23,13 @@ public class WebConfig implements WebMvcConfigurer {
         System.out.println("CORS origin configurado como: " + frontendOrigin);
     }
 
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource(@Value("${cors.frontend.origin}") String origin) {
-        System.out.println("Entrou na configuração");
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of(origin));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
-
-        System.out.println("configurou");
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        System.out.println("terminou a conf");
-        return source;
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins(frontendOrigin)
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 
 }

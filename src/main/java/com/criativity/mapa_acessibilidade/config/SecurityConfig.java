@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfigurationSource;
 
 
 @Configuration
@@ -16,15 +15,13 @@ import org.springframework.web.cors.CorsConfigurationSource;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, CorsConfigurationSource corsSource) throws Exception {
-        System.out.println("Entrou no security");
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .cors(cors -> cors.configurationSource(corsSource)) // 👈 usa o bean explicitamente
+                .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().permitAll())
                 .build();
     }
-
 }
