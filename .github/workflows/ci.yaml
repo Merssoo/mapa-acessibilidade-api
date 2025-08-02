@@ -1,0 +1,35 @@
+name: CI with Maven and Liquibase
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        run: mvn clean install -Pprod
+
+      - name: Run Liquibase migration (produção)
+        run: mvn liquibase:update -Pprod
+        env:
+          LIQUIBASE_URL: ${{ secrets.DB_URL }}
+          LIQUIBASE_USERNAME: ${{ secrets.DB_USER }}
+          LIQUIBASE_PASSWORD: ${{ secrets.DB_PASS }}
+
+    env:
+      CORS_ORIGIN: ${{ vars.CORS_ORIGIN }}
