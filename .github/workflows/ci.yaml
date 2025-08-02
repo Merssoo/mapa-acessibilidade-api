@@ -22,7 +22,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        run: mvn clean install -Pprod
+        run: mvn clean package -Pprod
 
       - name: Run Liquibase migration (produção)
         run: |
@@ -33,6 +33,9 @@ jobs:
             -Dliquibase.password="${{ secrets.DB_PASS }}" \
             -Dliquibase.driver=org.postgresql.Driver \
             -Dliquibase.changeLogFile=src/main/resources/db/changelog/changelog-master.xml
+
+      - name: Build Docker image
+        run: docker build -t mapa-acessibilidade .
 
     env:
       CORS_ORIGIN: ${{ vars.CORS_ORIGIN }}
