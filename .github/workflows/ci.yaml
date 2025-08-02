@@ -25,11 +25,11 @@ jobs:
         run: mvn clean install -Pprod
 
       - name: Run Liquibase migration (produção)
-        run: mvn liquibase:update -Pprod
-        env:
-          LIQUIBASE_URL: ${{ secrets.DB_URL }}
-          LIQUIBASE_USERNAME: ${{ secrets.DB_USER }}
-          LIQUIBASE_PASSWORD: ${{ secrets.DB_PASS }}
+        run: |
+          mvn liquibase:update -Pprod \
+            -DLIQUIBASE_URL="${{ secrets.DB_URL }}" \
+            -DLIQUIBASE_USERNAME="${{ secrets.DB_USER }}" \
+            -DLIQUIBASE_PASSWORD="${{ secrets.DB_PASS }}"
 
     env:
       CORS_ORIGIN: ${{ vars.CORS_ORIGIN }}
