@@ -32,7 +32,7 @@ jobs:
             -Dliquibase.username="${{ secrets.DB_USER }}" \
             -Dliquibase.password="${{ secrets.DB_PASS }}" \
             -Dliquibase.driver=org.postgresql.Driver \
-            -Dliquibase.changeLogFile=src/main/resources/db/changelog/db.changelog-master.xml
+            -Dliquibase.changeLogFile=./src/main/resources/db/changelog/db.changelog-master.xml
 
     env:
       CORS_ORIGIN: ${{ vars.CORS_ORIGIN }}
